@@ -1,0 +1,15 @@
+{
+	"title": "Nombres de las tablas de Parranderos Uniandes para pruebas de la aplicación cuando la base de datos no existe o está caida",
+	"unidadPersistencia": "ParranderosErrorUser",
+	"tablas":
+	[
+		"VacuAndes_sequence",
+		"X_USUARIO",
+		"X_CIUDADANO",
+		"X_VACUNA",
+		"X_VACUNACION",
+		"X_LOTEVACUNA",
+		"X_EPSREGIONAL",
+		"X_PUNTOVACUNACION"
+	]
+}

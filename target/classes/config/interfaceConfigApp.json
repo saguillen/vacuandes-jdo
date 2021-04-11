@@ -1,0 +1,221 @@
+{
+	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Usuario",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarUsuario"
+				},
+				{
+					"label": "Listar",
+					"event": "listarUsuarios"
+				},
+				{
+					"label": "Borrar por cedula",
+					"event": "eliminarUsuarioPorCedula"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "Vacuna",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarVacuna"
+				},
+				{
+					"label": "Listar",
+					"event": "listarVacunas"
+				},
+				{
+					"label": "Borrar por id",
+					"event": "eliminarVacunaPorId"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "EPS Regional",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarEPSRegional"
+				},
+				{
+					"label": "Listar",
+					"event": "listarEPSRegional"
+				},
+				{
+					"label": "Borrar por id",
+					"event": "eliminarEPSPorId"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "PuntoDeVacunacion",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarPuntoVacunacion"
+				},
+				{
+					"label": "Listar",
+					"event": "listarPuntoVacunacion"
+				},
+				{
+					"label": "Borrar por id",
+					"event": "eliminarPuntoVacunacionPorId"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "Lote Vacuna",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarLoteVacuna"
+				},
+				{
+					"label": "Listar",
+					"event": "listarLoteVacuna"
+				},
+				{
+					"label": "Borrar por id",
+					"event": "eliminarLoteVacunaPorId"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "Vacunacion",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarVacunacion"
+				},
+				{
+					"label": "Listar",
+					"event": "listarVacunacion"
+				},
+				{
+					"label": "Borrar por id",
+					"event": "eliminarVacunacionPorId"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "Ciudadano",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarCiudadano"
+				},
+				{
+					"label": "Listar",
+					"event": "listarCiudadano"
+				},
+				{
+					"label": "Borrar por id",
+					"event": "eliminarCiudadanoPorId"
+				},
+				{
+					"label": "Buscar por Nombre",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Parranderos",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de parranderos",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentación",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	
