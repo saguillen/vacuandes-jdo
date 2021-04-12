@@ -152,6 +152,15 @@
 				}
 			]
 		},
+		{ "menuTitle": "REQ",
+		  "options":
+			[
+				{
+					"label": "RF1",
+					"event": "reqCondiciones"
+				}
+			]
+		},
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

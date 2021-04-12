@@ -900,11 +900,12 @@ public class Parranderos
         return resp;
 	}
 	
-	public VOVacunacion adicionarVacunacion (Timestamp ts1, long idpunto)
+	public VOVacunacion adicionarVacunacion (Timestamp ts1, long idpunto, long idciudadano)
 	{
-	    log.info ("Adicionando Punto [" + ts1 + "," + idpunto+"]");
-	    Vacunacion resp = pp.adicionarVacunacion (ts1,idpunto);
-	    log.info ("Adicionando Punto: " + resp + " tuplas insertadas");
+	    log.info ("Adicionando vacunacion [" + ts1 + "," + idpunto+","+idciudadano+"]");
+	    System.out.println("Parametros llegan: "+ idpunto+" , "+ idciudadano);
+	    Vacunacion resp = pp.adicionarVacunacion(ts1, idpunto, idciudadano);
+	    log.info ("Adicionando vacunacion: " + resp + " tuplas insertadas");
 	    return resp;
 	}
 	
@@ -933,7 +934,7 @@ public class Parranderos
 	{
 	    log.info ("Adicionando Ciudadano [" + edad + ", " + ocupacion + enfermedad + grupo + etapa + estado +idUsuario+idPuntoV + "]");
 	    Ciudadano resp = pp.adicionarCiudadano (edad,ocupacion,enfermedad,grupo,etapa,estado,idUsuario,idPuntoV);
-	    log.info ("Adicionando Usuario: " + resp + " tuplas insertadas");
+	    log.info ("Adicionando Ciudadano: " + resp + " tuplas insertadas");
 	    return resp;
 	}
 	public List<VOCiudadano> darVOCiudadano()
@@ -969,6 +970,18 @@ public class Parranderos
         log.info ("Generando los VO de lote: " + voTipos.size() + " existentes");
         return voTipos;
 	}
+	
+//	public List<String> darRfc12()
+//	{
+//        List<String> voTipos = new LinkedList<String> ();
+//        for (LoteVacuna tb : pp.darLoteVacuna())
+//        {
+//        	voTipos.add (tb);
+//        	System.out.println(tb.toString());
+//        }
+//        return voTipos;
+//	}
+	
 	
 }
 

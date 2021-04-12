@@ -68,6 +68,7 @@ class SQLVacunacion
 	 * @param pm 
 	 * @param pm - El manejador de persistencia
 	 * @param idvacu 
+	 * @param idciudadano 
 	 * @param idBar - El identificador del bar
 	 * @param nombre - El nombre del bar
 	 * @param ciudad - La ciudad del bar
@@ -75,10 +76,10 @@ class SQLVacunacion
 	 * @param sedes - El número de sedes del bar
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarVacunacion (PersistenceManager pm, long idvacu, Timestamp ts1, long idpunto2) 
+	public long adicionarVacunacion (PersistenceManager pm, long idvacu, Timestamp ts1, long idpunto2, long idciudadano) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVacunacion() + "(id, fecha, idpuntov) values (?, ?, ?)");
-        q.setParameters(idvacu, ts1, idpunto2);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVacunacion() + "(id, fecha, idpuntov, idciudadano) values (?, ?, ?, ?)");
+        q.setParameters(idvacu, ts1, idpunto2, idciudadano);
         return (long) q.executeUnique();
 	}
 

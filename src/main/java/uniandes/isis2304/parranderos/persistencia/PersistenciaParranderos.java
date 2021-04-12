@@ -1805,7 +1805,7 @@ public class PersistenciaParranderos
         }
 	}
 	
-	public Vacunacion adicionarVacunacion(Timestamp ts1, long idpunto2) 
+	public Vacunacion adicionarVacunacion(Timestamp ts1, long idpunto2, long idciudadano) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1813,12 +1813,12 @@ public class PersistenciaParranderos
         {
             tx.begin();
             long idvacu = nextval ();
-            long tuplasInsertadas = sqlVacunacion.adicionarVacunacion(pm,idvacu,ts1, idpunto2);
+            long tuplasInsertadas = sqlVacunacion.adicionarVacunacion(pm,idvacu,ts1, idpunto2,idciudadano);
             tx.commit();
 
-            log.trace ("Inserción de vacunacion: " + ts1.toString() + ": " + tuplasInsertadas + " tuplas insertadas");
+            log.trace ("Inserción de vacunacion: " + idvacu + ": " + tuplasInsertadas + " tuplas insertadas");
 
-            return new Vacunacion(idvacu,ts1,idpunto2);
+            return new Vacunacion(idvacu,ts1,idpunto2,idciudadano);
         }
         catch (Exception e)
         {
@@ -1939,6 +1939,12 @@ public class PersistenciaParranderos
 	public List<LoteVacuna> darLoteVacuna()
 	{
 		return sqlLoteVacuna.darLoteVacunas(pmf.getPersistenceManager());
+	}
+	
+	public List<LoteVacuna> darRFC12()
+	{
+		return null;
+		
 	}
 	
  }

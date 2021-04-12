@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -574,31 +575,103 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	 * 			CRUD de CIUDADANO
 	 *****************************************************************/
     
+//    public void adicionarCiudadano( )
+//    {
+//    	try 
+//    	{
+//    		String id = JOptionPane.showInputDialog (this, "Insertar: edad,ocupacion(SALUD/PUBLICO/EXPUESTO/NINGUNO),enfermedadGrave(SI, NO),grupo(PRIMERO,SEGUNDO,TERCERO,CUARTO),etapa(1,2,3,4,5),estado(VACUNADO,NO VACUNADO, NO VACUNABLE),idusuario,idpuntov ", 
+//    				"Adicionar CIUDADANo", JOptionPane.QUESTION_MESSAGE);
+//    		if (id != null)
+//    		{
+//    			
+//    			String[] datos=id.split(",");
+//    			long edad=Long.parseLong(datos[0]);
+//    			String ocupacion= datos[1];
+//    			long enfermedad = 0;
+//    			if(datos[2]=="SI"){
+//    			 enfermedad = 1;}
+//    			String grupo = datos[3];
+//    			long etapa=Long.parseLong(datos[4]);
+//    			String estado = datos[5];
+//    			long idUsuario=Long.parseLong(datos[6]);
+//    			long idPuntoV=Long.parseLong(datos[7]);
+//
+//    			
+//    			
+//        		VOCiudadano tb = parranderos.adicionarCiudadano(edad,ocupacion,enfermedad,grupo,etapa,estado,idUsuario,idPuntoV);
+//        		if (tb == null)
+//        		{
+//        			throw new Exception ("No se pudo crear el ciudadano con usuario: " + idUsuario);
+//        		}
+//        		String resultado = "En adicionarCiudadano\n\n";
+//        		resultado += "Ciudadano adicionado exitosamente: " + tb;
+//    			resultado += "\n Operación terminada";
+//    			panelDatos.actualizarInterfaz(resultado);
+//    		}
+//    		else
+//    		{
+//    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+//    		}
+//		} 
+//    	catch (Exception e) 
+//    	{
+////			e.printStackTrace();
+//			String resultado = generarMensajeError(e);
+//			panelDatos.actualizarInterfaz(resultado);
+//		}
+//    }
+    
     public void adicionarCiudadano( )
     {
     	try 
     	{
-    		String id = JOptionPane.showInputDialog (this, "Insertar: edad,ocupacion,enfermedad Grave(SI, NO),grupo(PRIMERO,SEGUNDO,TERCERO,CUARTO),etapa(1,2,3,4,5),estado(VACUNADO,NO VACUNADO, NO VACUNABLE),idusuario,idpuntov ", 
-    				"Adicionar CIUDADANo", JOptionPane.QUESTION_MESSAGE);
+    		String id = JOptionPane.showInputDialog (this, "Insertar: edad,ocupacion(SALUD/PUBLICO/EXPUESTO/NINGUNO),enfermedadGrave(SI, NO),grupo(PRIMERO,SEGUNDO,TERCERO,CUARTO),idusuario,idpuntov ", 
+    				"Adicionar CIUDADANO: La Ocupacion es entre: (SALUD/PUBLICO/EXPUESTO/NINGUNO) ", JOptionPane.QUESTION_MESSAGE);
     		if (id != null)
     		{
     			
     			String[] datos=id.split(",");
     			long edad=Long.parseLong(datos[0]);
     			String ocupacion= datos[1];
-    			long enfermedad = -1;
+    			long enfermedad = 0;
     			if(datos[2]=="SI"){
     			 enfermedad = 1;}
-    			else if(datos[2]=="NO"){
-    				 enfermedad = 0;
-    			}
     			String grupo = datos[3];
-    			long etapa=Long.parseLong(datos[4]);
-    			String estado = datos[5];
-    			long idUsuario=Long.parseLong(datos[6]);
-    			long idPuntoV=Long.parseLong(datos[7]);
-
+    			long etapa=0;
+    			String estado = "NO VACUNADO";
+    			long idUsuario=Long.parseLong(datos[4]);
+    			long idPuntoV=Long.parseLong(datos[5]);
+    		
+    			String[] etapasC = new String[5];
+    			etapasC= reqCondiciones();
     			
+    			if(edad<=15){
+    				estado="NO VACUNABLE";
+    			}
+    			
+
+    			System.out.println(edad);
+    			System.out.println(enfermedad);
+    			System.out.println(ocupacion);
+
+    			System.out.println((edad>=60&&edad<=79)&&(enfermedad==0)&&(ocupacion.equals("SALUD")));
+    			
+    			if(edad>=80){
+    				etapa=1;
+    			}else if((edad>=60&&edad<=79)&&(enfermedad==0)&&(ocupacion.equals("SALUD"))){
+    				etapa=2;
+    			}else if((edad>16&&edad<59&&enfermedad==0)||(edad>16&&edad<59&&enfermedad==1)||(ocupacion.equals("PUBLICO"))){
+    				etapa=3;
+    			}else if((edad>16&&enfermedad==0&&ocupacion.equals("EXPUESTO"))){
+    				etapa=4;
+    			}else if(edad>16&&enfermedad==0&&ocupacion.equals("NINGUNO")){
+    				etapa=5;
+    			}
+    			
+    			 
+
+
+    			//25,PUBLICO,NO,TERCERO,8,64
     			
         		VOCiudadano tb = parranderos.adicionarCiudadano(edad,ocupacion,enfermedad,grupo,etapa,estado,idUsuario,idPuntoV);
         		if (tb == null)
@@ -609,6 +682,9 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         		resultado += "Ciudadano adicionado exitosamente: " + tb;
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
+    			
+    			registrarAvance("Ciudadano asignado a un punto de vacunacion");
+    			
     		}
     		else
     		{
@@ -693,6 +769,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     			String[] datos=id.split(",");
     			String fechaStr=datos[0];
     			long idpunto=Long.parseLong(datos[1]);
+    			long idciudadano=Long.parseLong(datos[2]);
 
     			final String FORMAT = "yyyy-MM-dd HH:mm";
     			DateFormat formatter = new SimpleDateFormat(FORMAT);
@@ -700,7 +777,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
                 Date fecha = formatter.parse(fechaStr);
                 Timestamp  ts1 = new Timestamp(fecha.getTime());
 
-        		VOVacunacion tb = parranderos.adicionarVacunacion(ts1, idpunto );
+        		VOVacunacion tb = parranderos.adicionarVacunacion(ts1, idpunto, idciudadano);
         		
         		if (tb == null)
         		{
@@ -710,6 +787,8 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         		resultado += "Vacunacion adicionada exitosamente: " + tb;
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
+    			
+    			registrarAvance("Ciudadano asignado a una cita de vacunacion: "+fechaStr);
     		}
     		else
     		{
@@ -959,9 +1038,129 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 
     
 	/* ****************************************************************
-	 * 			CRUD de USUARIO
+	 * 			REQS
 	 *****************************************************************/
+    public  String[] reqCondiciones()
+    {
+		String[] etapas = new String[5];
 
+    	try{
+    	String c1 = JOptionPane.showInputDialog (this, "Insertar condiciones etapa 1: ", 
+				"Adicionar condicion (edad>#,enfermedadGrave==SI/NO,ocupacion==SALUD/PUBLICO/EXPUESTO/NINGUNO)", JOptionPane.QUESTION_MESSAGE);
+    	//edad>=80,NO,NINGUNO
+    	String c2 = JOptionPane.showInputDialog (this, "Insertar condiciones etapa 2: ", 
+				"Adicionar condicion (edad>#,enfermedadGrave==SI/NO,ocupacion==SALUD/PUBLICO/EXPUESTO/NINGUNO)", JOptionPane.QUESTION_MESSAGE);
+    	//edad>=60&&edad<=79,enfermedad==NO,ocupacion==SALUD
+    	String c3 = JOptionPane.showInputDialog (this, "Insertar condiciones etapa 3: ", 
+				"Adicionar condicion (edad>#,enfermedad==SI/NO,ocupacion==SALUD/PUBLICO/EXPUESTO/NINGUNO)", JOptionPane.QUESTION_MESSAGE);
+    	//edad>16&&edad<59,enfermedad==SI,ocupacion==publico
+    	String c4 = JOptionPane.showInputDialog (this, "Insertar condiciones etapa 4: ", 
+				"Adicionar condicion (edad>#,enfermedadGrave==SI/NO,ocupacion==SALUD/PUBLICO/EXPUESTO/NINGUNO)", JOptionPane.QUESTION_MESSAGE);
+    	//edad>16,enfermedad==NO,ocupacion==EXPUESTO
+    	String c5 = JOptionPane.showInputDialog (this, "Insertar condiciones etapa 5: ", 
+				"Adicionar condicion (edad>#,enfermedadGrave==SI/NO,ocupacion==SALUD/PUBLICO/EXPUESTO/NINGUNO)", JOptionPane.QUESTION_MESSAGE);
+    	//edad>16,enfermedad==NO,ocupacion==NINGUNO
+    	
+
+    	
+    	if (c1 != null||c2 != null||c3 != null||c4 != null||c5 != null)
+		{
+			
+			String[] datos=c1.split(",");
+			String condc11=datos[0].trim();
+			String condc12=datos[1].trim();
+			String condc13=datos[2].trim();
+			
+			etapas[0] = condc11+"&&"+condc12+"&&"+condc13; 
+			System.out.println(etapas[0]);
+			String[] datos2=c2.split(",");
+			String condc21=datos2[0].trim();
+			String condc22=datos2[1].trim();
+			String condc23=datos2[2].trim();
+			
+
+			etapas[1] = condc21+"&&"+condc22+"&&"+condc23; 
+
+			String[] datos3=c3.split(",");
+			String condc31=datos3[0].trim();
+			String condc32=datos3[1].trim();
+			String condc33=datos3[2].trim();
+			
+
+			etapas[2] = condc31+"&&"+condc32+"&&"+condc33; 
+			
+			String[] datos4=c4.split(",");
+			String condc41=datos4[0].trim();
+			String condc42=datos4[1].trim();
+			String condc43=datos4[2].trim();
+			
+
+			etapas[3] = condc41+"&&"+condc42+"&&"+condc43; 
+			
+			String[] datos5=c5.split(",");
+			String condc51=datos5[0].trim();
+			String condc52=datos5[1].trim();
+			String condc53=datos5[2].trim();
+			
+			etapas[4] = condc51+"&&"+condc52+"&&"+condc53;
+			
+			String resultado = "Adicionadas Condiciones\n\n";
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+			
+			
+
+		}
+    	else{
+    		throw new Exception("No se pudieron registrar las condiciones de priorizacion");
+    	}
+    	}
+    	catch(Exception e){
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+
+    	}
+    	
+    	etapas[0]="edad>=80";
+    	etapas[1]="edad>=60&&edad<=79&&enfermedad==0&&ocupacion.equals("+"SALUD"+")";
+    	etapas[2]="edad>16&&edad<59,enfermedad==0,ocupacion.equals("+"PUBLICO"+")";
+    	etapas[3]="edad>16,enfermedad==0,ocupacion.equals("+"EXPUESTO"+")";
+    	etapas[4]="edad>16,enfermedad==0,ocupacion.equals("+"NINGUNO"+")";
+
+    	
+    	
+    	
+		return etapas;
+		
+    }
+    
+    public String registrarAvance(String avance)
+    {
+		String resp = "";
+		resp += avance+"\n\n";
+		
+		return avance;
+    }
+    
+    public void reqfc12()
+    {
+    	try 
+    	{
+//			List <String> lista = parranderos.darRfc12();
+
+			String resultado = "En listarUsuarios";
+//			resultado +=  "\n" + listar (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
 	/* ****************************************************************
 	 * 			Métodos administrativos
 	 *****************************************************************/

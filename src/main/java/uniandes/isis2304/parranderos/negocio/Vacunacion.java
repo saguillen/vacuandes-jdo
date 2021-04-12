@@ -39,6 +39,8 @@ public class Vacunacion implements VOVacunacion
 	
 	private long idPuntov;
 
+	private long idCiudadano;
+
 	/**
 	 * El número de sedes del bar en la ciudad
 	 */
@@ -48,11 +50,17 @@ public class Vacunacion implements VOVacunacion
 	 *****************************************************************/
     /**
      * Constructor por defecto
+     * @param idciudadano 
+     * @param idpunto2 
+     * @param ts1 
+     * @param idvacu 
      */
 	public Vacunacion() {
 		this.id = 0;
 		this.fecha = null;
 		this.idPuntov = 0;
+		this.idCiudadano = 0;
+
 	}
 
 	/**
@@ -63,10 +71,12 @@ public class Vacunacion implements VOVacunacion
 	 * @param presupuesto - El presupuesto del bar (ALTO, MEDIO, BAJO)
 	 * @param cantSedes - Las sedes del bar (Mayor que 0)
 	 */
-	public Vacunacion(long id, Timestamp fecha, long idPuntov) {
+	public Vacunacion(long id, Timestamp fecha, long idPuntov, long idciudadano) {
 		this.id = id;
 		this.fecha = fecha;
 		this.idPuntov = idPuntov;
+		this.idCiudadano = idciudadano;
+
 	}
     /**
 	 * @return El id del bar
@@ -77,6 +87,14 @@ public class Vacunacion implements VOVacunacion
 	}
 	
 
+
+	public long getIdCiudadano() {
+		return idCiudadano;
+	}
+
+	public void setIdCiudadano(long idCiudadano) {
+		this.idCiudadano = idCiudadano;
+	}
 
 	/**
 	 * @param id - El nuevo id del bar
@@ -114,7 +132,7 @@ public class Vacunacion implements VOVacunacion
 	 */
 	public String toString() 
 	{
-		return "Cita de Vacunacion [id=" + id + "punto: "+idPuntov + "]";
+		return "Cita de Vacunacion [id=" + id + " punto: "+idPuntov + " idCiudadano:"+idCiudadano+"]";
 	}
 	
 

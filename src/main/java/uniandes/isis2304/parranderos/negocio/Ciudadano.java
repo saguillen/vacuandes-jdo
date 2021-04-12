@@ -218,7 +218,7 @@ public class Ciudadano implements VOCiudadano
 	@Override
 	public String toString() 
 	{
-		return "Ciudadano [id=" + edad + ", nombre=" + ocupacion + ", ciudad=" + enfermedad + ", presupuesto=" +", grupo: "+ grupo + ", etapa: "+etapa+", estado: "+estado+"idUsuario: "+idusuario+"idPuntov: "+idpuntov+"]";
+		return "Ciudadano [id=" +id+ edad  + ocupacion + enfermedad + grupo +etapa+estado+idusuario+idpuntov+"]";
 	}
 
 }
